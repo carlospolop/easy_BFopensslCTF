@@ -1,10 +1,10 @@
 #!/bin/bash
 
-cyphers_aes_main="aes128 aes192 aes256 aes-128-cbc aes-192-cbc aes-256-cbc"
+cyphers_aes_main="aes-128-cbc aes-192-cbc aes-256-cbc"
 cyphers_aes_rest="aes-128-ecb aes-192-ecb aes-256-ecb"
 
-cyphers_des_main="des des3 desx"
-cyphers_des_rest="des-cbc des-cfb des-ecb des-ede des-ede-cbc des-ede-cfb des-ede-ofb des-ede3 des-ede3-cbc des-ede3-cfb des-ede3-ofb des-ofb"
+cyphers_des_main="des-cbc des3 desx"
+cyphers_des_rest="des-cfb des-ecb des-ede des-ede-cbc des-ede-cfb des-ede-ofb des-ede3 des-ede3-cbc des-ede3-cfb des-ede3-ofb des-ofb"
 
 cyphers_rc4_main="rc4"
 cyphers_rc4_rest="rc4-40"
@@ -12,17 +12,17 @@ cyphers_rc4_rest="rc4-40"
 cyphers_rc2_main="rc2"
 cyphers_rc2_rest="rc2-40-cbc rc2-64-cbc rc2-cbc rc2-cfb rc2-ecb rc2-ofb"
 
-cyphers_bf_main="bf"
-cyphers_bf_rest="bf-cbc bf-cfb bf-ecb bf-ofb"
+cyphers_bf_main="bf-cbc"
+cyphers_bf_rest="bf-cfb bf-ecb bf-ofb"
 
-cyphers_casts_main="cast"
-cyphers_casts_rest="cast-cbc cast5-cbc cast5-cfb cast5-ecb cast5-ofb"
+cyphers_casts_main="cast-cbc"
+cyphers_casts_rest="cast5-cbc cast5-cfb cast5-ecb cast5-ofb"
 
-cyphers_seed_main="seed"
-cyphers_seed_rest="seed-cbc seed-cfb seed-ecb seed-ofb"
+cyphers_seed_main="seed-cbc"
+cyphers_seed_rest="seed-cfb seed-ecb seed-ofb"
 
-cyphers_camellia_main="camellia128 camellia192 camellia256"
-cyphers_camellia_rest="camellia-128-cbc camellia-128-cfb camellia-192-cbc camellia-192-cfb camellia-256-cbc camellia-256-cfb"
+cyphers_camellia_main="camellia-128-cbc camellia-192-cbc camellia-256-cbc"
+cyphers_camellia_rest="camellia-128-cfb camellia-192-cfb camellia-256-cfb"
 
 cyphers_id_rest="id-aes128-CCM id-aes128-GCM id-aes128-wrap id-aes192-CCM id-aes192-GCM id-aes192-wrap id-aes256-CCM id-aes256-GCM id-aes256-wrap"
 

@@ -12,3 +12,5 @@ bf_openssl.bash -f input_file [-v] [-a] [-b] [-h] [-t password] [-p pass_file]
   t: Use pass
   p: Use pass file
 ```
+
+It doesn't show empty, data, Non-ISO extended-ASCII, DOS executable, COM executable for DOS, PGP Secret Key discovered files.

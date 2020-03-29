@@ -59,13 +59,24 @@ if [ ! -f $in_file ];then
 fi
 
 
+function not_cares {
+    output_file="$1"
+    useless="data|empty"
+    for i in $useless; do
+        if [[ $output_file == *"$i"* ]]; then
+            echo "1" > /tmp/lol
+            echo "1"
+        fi
+    done
+}
+
+
+
 function decode { #$1 password
     out_pref="dcd_"
     out_suf="_out"
-    useless="data empty"
     important="[+]"
 
-    echo "[i] Pass: $1"
     for cypher in $total_cyphers; do
         out="$out_pref$cypher$out_suf"
         openssl_line="openssl $cypher $b64 -d -in $in_file -out $out -pass pass:$1"
@@ -73,20 +84,23 @@ function decode { #$1 password
         next=false
         if [[ -f $out ]]; then #Comprobamos si existe el archivo descifrado
             output_file="$(file -z $out)"
-            for i in $useless; do #Comprobamos si la salida del comando file tiene alguna palabra prohibida
-                if [[ $output_file == *"$i"* ]]; then
-                    next=true
-                    if (( verbose > 0 ));then
-                        echo $output_file
-                        if (( verbose > 1 )); then #Si verbose 2 o más, mostramos la salida de openssl
-                            echo $output_openssl
-                        fi
-                    fi
-                fi
-            done
             
-            if [ "$next" = false ];then #Si no tenia ninguna de las palabras prohibidas
+            if [ "`echo "$output_file" | grep -vE 'empty|data|Non-ISO extended-ASCII|DOS executable|COM executable for DOS|PGP Secret Key'`" ]; then #Comprobamos si el tipode archivo resultante es interesante
+                printf "[i] Pass: $1 "
                 echo "$important $output_file  ($openssl_line)"
+            fi
+
+            if [ "`strings -n 9 "$out" | grep -E '.*'`" ]; then #Comprobamos si el tipode archivo resultante es interesante
+                printf "[i] Pass: $1 "
+                echo "$important Strings: $(strings -n 9 "$out")  ($openssl_line)"
+            fi
+
+            if (( verbose > 0 ));then
+                printf "[i] Pass: $1 "
+                printf "$output_file\n"
+                if (( verbose > 1 )); then #Si verbose 2 o más, mostramos la salida de openssl
+                    printf "$output_openssl\n"
+                fi
             fi
 
             rm $out #Delete the file
@@ -111,7 +125,6 @@ if [ ! "$password_file" = false ]; then
     if [[ -f $password_file ]]; then
         while read line; do           
             decode $line
-            echo ""     
         done <$password_file
     else
         echo "Password file does not exists: $password_file"
